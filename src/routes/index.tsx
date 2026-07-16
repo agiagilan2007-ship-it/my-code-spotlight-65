@@ -187,6 +187,12 @@ function Portfolio() {
   return (
     <div className="portfolio">
       <style>{CSS}</style>
+      <div className="aurora" aria-hidden>
+        <span className="aurora-blob b1" />
+        <span className="aurora-blob b2" />
+        <span className="aurora-blob b3" />
+        <span className="aurora-blob b4" />
+      </div>
       <div className="grid-bg" aria-hidden />
 
       <header className="site-header">
@@ -202,6 +208,13 @@ function Portfolio() {
             <li><a href="#achievements">Achievements</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+          <a
+            className="btn btn-primary btn-sm nav-resume"
+            href={resumePdf.url}
+            download="Agilan_V_MU_Resume.pdf"
+          >
+            Resume ↓
+          </a>
         </nav>
       </header>
 
