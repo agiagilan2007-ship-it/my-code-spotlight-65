@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import nptelPdf from "@/assets/NPTEL-Data_Analytics_with_Python_Certificate_AGILAN_V_MU.pdf.asset.json";
 import pythonFoundationPdf from "@/assets/Python_Foundation_Certification_-_AGILAN_V_MU.pdf.asset.json";
 import gcpMlPdf from "@/assets/Google_Cloud_Machine_Learning_Engineer_Certification_Prep_-_Agilan_V_MU.pdf.asset.json";
 import genaiPdf from "@/assets/Generative_AI_Foundations_-_IT_Integration_with_Generative_AI_-_Agilan_V_MU.pdf.asset.json";
 import canvaPdf from "@/assets/Coursera_-_Build_your_buisness_brand_using_Canva-_Agilan_V_MU.pdf.asset.json";
+import resumePdf from "@/assets/Agilan_V_MU_Resume.pdf.asset.json";
+
+const CONTACT_EMAIL = "agiagilan2007@gmail.com";
 
 export const Route = createFileRoute("/")({
   head: () => ({
