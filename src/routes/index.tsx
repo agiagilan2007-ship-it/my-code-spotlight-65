@@ -134,6 +134,8 @@ const TERMINAL_LINES = [
 function Portfolio() {
   const [typed, setTyped] = useState<string[]>([]);
   const [lightbox, setLightbox] = useState<null | (typeof CERTIFICATES)[number]>(null);
+  const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
 
   useEffect(() => {
     let i = 0;
@@ -150,6 +152,34 @@ function Portfolio() {
     }, 550);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (!lightbox) {
+      setPdfBlobUrl(null);
+      return;
+    }
+    let cancelled = false;
+    let objectUrl: string | null = null;
+    setPdfLoading(true);
+    setPdfBlobUrl(null);
+    fetch(lightbox.pdf)
+      .then((r) => r.blob())
+      .then((blob) => {
+        if (cancelled) return;
+        objectUrl = URL.createObjectURL(
+          new Blob([blob], { type: "application/pdf" })
+        );
+        setPdfBlobUrl(objectUrl);
+        setPdfLoading(false);
+      })
+      .catch(() => {
+        if (!cancelled) setPdfLoading(false);
+      });
+    return () => {
+      cancelled = true;
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [lightbox]);
 
   return (
     <div className="portfolio">
