@@ -480,9 +480,13 @@ const CSS = `
 .portfolio .contact-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:24px; }
 .portfolio .site-footer { border-top:1px solid var(--border); padding:28px 0; text-align:center; color:var(--muted-2); font-size:0.8rem; }
 .portfolio .lightbox { position:fixed; inset:0; background:rgba(11,15,25,0.92); display:flex; align-items:center; justify-content:center; z-index:100; padding:40px; }
-.portfolio .lightbox-inner { max-width:min(90vw,720px); }
-.portfolio .lightbox-close { position:absolute; top:24px; right:32px; background:none; border:none; color:var(--text); font-size:2rem; cursor:pointer; line-height:1; }
-.portfolio .lightbox-note { text-align:center; color:var(--muted); margin-top:16px; font-size:0.85rem; }
+.portfolio .lightbox-inner { width:min(92vw,960px); height:min(88vh,900px); background:var(--surface); border:1px solid var(--border); border-radius:10px; display:flex; flex-direction:column; overflow:hidden; }
+.portfolio .lightbox-header { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px 18px; border-bottom:1px solid var(--border); background:var(--surface-2); }
+.portfolio .lightbox-title { font-family:var(--font-display); font-weight:600; font-size:1rem; margin:0; color:var(--text); }
+.portfolio .lightbox-issuer { color:var(--muted); font-size:0.78rem; margin:2px 0 0; }
+.portfolio .lightbox-pdf { flex:1; width:100%; border:0; background:#fff; }
+.portfolio .btn-sm { padding:8px 14px; font-size:0.8rem; }
+.portfolio .lightbox-close { position:absolute; top:16px; right:24px; background:none; border:none; color:var(--text); font-size:2rem; cursor:pointer; line-height:1; z-index:2; }
 @media (max-width:860px) {
   .portfolio .hero { grid-template-columns:1fr; padding-top:48px; }
   .portfolio .nav-links { display:none; }
