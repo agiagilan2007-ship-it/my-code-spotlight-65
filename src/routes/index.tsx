@@ -231,7 +231,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="projects">
-          <h2 className="section-title"><span className="mono index">03</span> Projects</h2>
+          <h2 className="section-title">Projects</h2>
           <p className="section-sub">Live GitHub repositories · github.com/agiagilan2007-ship-it</p>
           <div className="project-grid">
             {PROJECTS.map((p) => (
