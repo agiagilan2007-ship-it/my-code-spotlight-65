@@ -352,7 +352,13 @@ function Portfolio() {
                 Open PDF ↗
               </a>
             </div>
-            <iframe src={lightbox.pdf} className="lightbox-pdf" title={lightbox.title} />
+            {pdfBlobUrl ? (
+              <iframe src={pdfBlobUrl} className="lightbox-pdf" title={lightbox.title} />
+            ) : (
+              <div className="lightbox-loading mono">
+                {pdfLoading ? "Loading certificate…" : "Unable to load PDF. Use “Open PDF ↗”."}
+              </div>
+            )}
           </div>
         </div>
       )}
