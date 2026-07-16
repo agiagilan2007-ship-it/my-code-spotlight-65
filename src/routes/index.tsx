@@ -339,9 +339,17 @@ function Portfolio() {
 
         <section className="section container" id="contact">
           <h2 className="section-title">Contact</h2>
-          <p className="section-sub">Open to internships, collaborations, and learning opportunities.</p>
+          <p className="section-sub">
+            Open to internships, collaborations, and learning opportunities. Send me a message —
+            it opens in your email app and lands in{" "}
+            <span className="mono accent">{CONTACT_EMAIL}</span>.
+          </p>
+          <ContactForm />
           <div className="contact-row">
-            <a className="btn btn-primary" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-ghost" href={`mailto:${CONTACT_EMAIL}`}>
+              Email directly
+            </a>
+            <a className="btn btn-ghost" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
             <a className="btn btn-ghost" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
