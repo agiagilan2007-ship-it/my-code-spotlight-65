@@ -215,7 +215,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="skills">
-          <h2 className="section-title"><span className="mono index">02</span> Skills</h2>
+          <h2 className="section-title">Skills</h2>
           <div className="skill-groups">
             {SKILL_GROUPS.map((g) => (
               <div key={g.label}>
