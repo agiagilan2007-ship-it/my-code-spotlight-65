@@ -280,7 +280,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="achievements">
-          <h2 className="section-title"><span className="mono index">05</span> Achievements</h2>
+          <h2 className="section-title">Achievements</h2>
           <ul className="achievement-list">
             {ACHIEVEMENTS.map((a) => (
               <li key={a} className="achievement-item">
