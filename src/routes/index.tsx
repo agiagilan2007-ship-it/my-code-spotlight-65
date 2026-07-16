@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Data analytics and Python portfolio with real GitHub ML projects and LinkedIn certifications.",
+          "Portfolio of Agilan V MU — data analytics, Python, ML projects (spam filter, stock prediction, fake news detection), certifications and skills.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
