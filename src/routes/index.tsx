@@ -61,26 +61,31 @@ const CERTIFICATES = [
     title: "Data Analytics with Python",
     issuer: "NPTEL · IIT Roorkee",
     accent: "#F2B807",
+    pdf: nptelPdf.url,
   },
   {
     title: "Python Foundation Certification",
     issuer: "Infosys Springboard",
     accent: "#2DD4BF",
+    pdf: pythonFoundationPdf.url,
   },
   {
-    title: "Fundamentals of Python Programming (Parts 1 & 2)",
-    issuer: "Infosys Springboard",
+    title: "Google Cloud ML Engineer Certification Prep",
+    issuer: "Google Cloud",
     accent: "#F2B807",
+    pdf: gcpMlPdf.url,
   },
   {
-    title: "Basics of Python",
+    title: "Generative AI Foundations — IT Integration with GenAI",
     issuer: "Infosys Springboard",
     accent: "#2DD4BF",
+    pdf: genaiPdf.url,
   },
   {
-    title: "Programming Using Python",
-    issuer: "Infosys Springboard",
+    title: "Build Your Business Brand Using Canva",
+    issuer: "Coursera",
     accent: "#F2B807",
+    pdf: canvaPdf.url,
   },
 ];
 
