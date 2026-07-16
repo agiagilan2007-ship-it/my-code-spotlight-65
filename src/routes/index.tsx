@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import nptelPdf from "@/assets/NPTEL-Data_Analytics_with_Python_Certificate_AGILAN_V_MU.pdf.asset.json";
+import pythonFoundationPdf from "@/assets/Python_Foundation_Certification_-_AGILAN_V_MU.pdf.asset.json";
+import gcpMlPdf from "@/assets/Google_Cloud_Machine_Learning_Engineer_Certification_Prep_-_Agilan_V_MU.pdf.asset.json";
+import genaiPdf from "@/assets/Generative_AI_Foundations_-_IT_Integration_with_Generative_AI_-_Agilan_V_MU.pdf.asset.json";
+import canvaPdf from "@/assets/Coursera_-_Build_your_buisness_brand_using_Canva-_Agilan_V_MU.pdf.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -56,26 +61,31 @@ const CERTIFICATES = [
     title: "Data Analytics with Python",
     issuer: "NPTEL · IIT Roorkee",
     accent: "#F2B807",
+    pdf: nptelPdf.url,
   },
   {
     title: "Python Foundation Certification",
     issuer: "Infosys Springboard",
     accent: "#2DD4BF",
+    pdf: pythonFoundationPdf.url,
   },
   {
-    title: "Fundamentals of Python Programming (Parts 1 & 2)",
-    issuer: "Infosys Springboard",
+    title: "Google Cloud ML Engineer Certification Prep",
+    issuer: "Google Cloud",
     accent: "#F2B807",
+    pdf: gcpMlPdf.url,
   },
   {
-    title: "Basics of Python",
+    title: "Generative AI Foundations — IT Integration with GenAI",
     issuer: "Infosys Springboard",
     accent: "#2DD4BF",
+    pdf: genaiPdf.url,
   },
   {
-    title: "Programming Using Python",
-    issuer: "Infosys Springboard",
+    title: "Build Your Business Brand Using Canva",
+    issuer: "Coursera",
     accent: "#F2B807",
+    pdf: canvaPdf.url,
   },
 ];
 
@@ -194,7 +204,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="about">
-          <h2 className="section-title"><span className="mono index">01</span> About</h2>
+          <h2 className="section-title">About</h2>
           <p className="about-bio">
             I'm a school student with 5 completed certifications in Python and data analytics,
             including a 12-week NPTEL program from IIT Roorkee (63% consolidated, 29/25 on the
@@ -205,7 +215,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="skills">
-          <h2 className="section-title"><span className="mono index">02</span> Skills</h2>
+          <h2 className="section-title">Skills</h2>
           <div className="skill-groups">
             {SKILL_GROUPS.map((g) => (
               <div key={g.label}>
@@ -221,7 +231,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="projects">
-          <h2 className="section-title"><span className="mono index">03</span> Projects</h2>
+          <h2 className="section-title">Projects</h2>
           <p className="section-sub">Live GitHub repositories · github.com/agiagilan2007-ship-it</p>
           <div className="project-grid">
             {PROJECTS.map((p) => (
@@ -241,7 +251,7 @@ function Portfolio() {
 
         <section className="section" id="certificates">
           <div className="container">
-            <h2 className="section-title"><span className="mono index">04</span> Certificates</h2>
+            <h2 className="section-title">Certificates</h2>
             <p className="section-sub">
               Course completion certificates from my{" "}
               <a className="link-accent" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
@@ -270,7 +280,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="achievements">
-          <h2 className="section-title"><span className="mono index">05</span> Achievements</h2>
+          <h2 className="section-title">Achievements</h2>
           <ul className="achievement-list">
             {ACHIEVEMENTS.map((a) => (
               <li key={a} className="achievement-item">
@@ -282,7 +292,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="contact">
-          <h2 className="section-title"><span className="mono index">06</span> Contact</h2>
+          <h2 className="section-title">Contact</h2>
           <p className="section-sub">Open to internships, collaborations, and learning opportunities.</p>
           <div className="contact-row">
             <a className="btn btn-primary" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
@@ -303,13 +313,16 @@ function Portfolio() {
         <div className="lightbox open" role="dialog" onClick={() => setLightbox(null)}>
           <button className="lightbox-close" aria-label="Close">×</button>
           <div className="lightbox-inner" onClick={(e) => e.stopPropagation()}>
-            <CertPlate title={lightbox.title} issuer={lightbox.issuer} accent={lightbox.accent} large />
-            <p className="lightbox-note mono">
-              View original credential on{" "}
-              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="link-accent">
-                LinkedIn ↗
+            <div className="lightbox-header">
+              <div>
+                <p className="lightbox-title">{lightbox.title}</p>
+                <p className="lightbox-issuer mono">{lightbox.issuer}</p>
+              </div>
+              <a href={lightbox.pdf} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm">
+                Open PDF ↗
               </a>
-            </p>
+            </div>
+            <iframe src={lightbox.pdf} className="lightbox-pdf" title={lightbox.title} />
           </div>
         </div>
       )}
@@ -467,9 +480,13 @@ const CSS = `
 .portfolio .contact-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:24px; }
 .portfolio .site-footer { border-top:1px solid var(--border); padding:28px 0; text-align:center; color:var(--muted-2); font-size:0.8rem; }
 .portfolio .lightbox { position:fixed; inset:0; background:rgba(11,15,25,0.92); display:flex; align-items:center; justify-content:center; z-index:100; padding:40px; }
-.portfolio .lightbox-inner { max-width:min(90vw,720px); }
-.portfolio .lightbox-close { position:absolute; top:24px; right:32px; background:none; border:none; color:var(--text); font-size:2rem; cursor:pointer; line-height:1; }
-.portfolio .lightbox-note { text-align:center; color:var(--muted); margin-top:16px; font-size:0.85rem; }
+.portfolio .lightbox-inner { width:min(92vw,960px); height:min(88vh,900px); background:var(--surface); border:1px solid var(--border); border-radius:10px; display:flex; flex-direction:column; overflow:hidden; }
+.portfolio .lightbox-header { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px 18px; border-bottom:1px solid var(--border); background:var(--surface-2); }
+.portfolio .lightbox-title { font-family:var(--font-display); font-weight:600; font-size:1rem; margin:0; color:var(--text); }
+.portfolio .lightbox-issuer { color:var(--muted); font-size:0.78rem; margin:2px 0 0; }
+.portfolio .lightbox-pdf { flex:1; width:100%; border:0; background:#fff; }
+.portfolio .btn-sm { padding:8px 14px; font-size:0.8rem; }
+.portfolio .lightbox-close { position:absolute; top:16px; right:24px; background:none; border:none; color:var(--text); font-size:2rem; cursor:pointer; line-height:1; z-index:2; }
 @media (max-width:860px) {
   .portfolio .hero { grid-template-columns:1fr; padding-top:48px; }
   .portfolio .nav-links { display:none; }
