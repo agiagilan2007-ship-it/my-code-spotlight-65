@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import nptelPdf from "@/assets/NPTEL-Data_Analytics_with_Python_Certificate_AGILAN_V_MU.pdf.asset.json";
 import pythonFoundationPdf from "@/assets/Python_Foundation_Certification_-_AGILAN_V_MU.pdf.asset.json";
 import gcpMlPdf from "@/assets/Google_Cloud_Machine_Learning_Engineer_Certification_Prep_-_Agilan_V_MU.pdf.asset.json";
 import genaiPdf from "@/assets/Generative_AI_Foundations_-_IT_Integration_with_Generative_AI_-_Agilan_V_MU.pdf.asset.json";
 import canvaPdf from "@/assets/Coursera_-_Build_your_buisness_brand_using_Canva-_Agilan_V_MU.pdf.asset.json";
+import resumePdf from "@/assets/Agilan_V_MU_Resume.pdf.asset.json";
+
+const CONTACT_EMAIL = "agiagilan2007@gmail.com";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -184,6 +187,12 @@ function Portfolio() {
   return (
     <div className="portfolio">
       <style>{CSS}</style>
+      <div className="aurora" aria-hidden>
+        <span className="aurora-blob b1" />
+        <span className="aurora-blob b2" />
+        <span className="aurora-blob b3" />
+        <span className="aurora-blob b4" />
+      </div>
       <div className="grid-bg" aria-hidden />
 
       <header className="site-header">
@@ -199,6 +208,13 @@ function Portfolio() {
             <li><a href="#achievements">Achievements</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+          <a
+            className="btn btn-primary btn-sm nav-resume"
+            href={resumePdf.url}
+            download="Agilan_V_MU_Resume.pdf"
+          >
+            Resume ↓
+          </a>
         </nav>
       </header>
 
@@ -323,9 +339,17 @@ function Portfolio() {
 
         <section className="section container" id="contact">
           <h2 className="section-title">Contact</h2>
-          <p className="section-sub">Open to internships, collaborations, and learning opportunities.</p>
+          <p className="section-sub">
+            Open to internships, collaborations, and learning opportunities. Send me a message —
+            it opens in your email app and lands in{" "}
+            <span className="mono accent">{CONTACT_EMAIL}</span>.
+          </p>
+          <ContactForm />
           <div className="contact-row">
-            <a className="btn btn-primary" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-ghost" href={`mailto:${CONTACT_EMAIL}`}>
+              Email directly
+            </a>
+            <a className="btn btn-ghost" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
             <a className="btn btn-ghost" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
@@ -365,6 +389,69 @@ function Portfolio() {
     </div>
   );
 }
+
+function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Portfolio contact from ${name || "visitor"}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}\n\n— Sent from agilan.portfolio`
+    );
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    setSent(true);
+  };
+
+  return (
+    <form className="contact-form" onSubmit={onSubmit}>
+      <div className="contact-grid">
+        <label className="field">
+          <span className="field-label mono">name</span>
+          <input
+            required
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name"
+          />
+        </label>
+        <label className="field">
+          <span className="field-label mono">email</span>
+          <input
+            required
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+          />
+        </label>
+      </div>
+      <label className="field">
+        <span className="field-label mono">message</span>
+        <textarea
+          required
+          rows={5}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Tell me about the opportunity, project, or idea…"
+        />
+      </label>
+      <div className="contact-actions">
+        <button type="submit" className="btn btn-primary">Send Message →</button>
+        {sent && (
+          <span className="contact-sent mono">
+            ✓ Opened your email app — hit send to deliver it.
+          </span>
+        )}
+      </div>
+    </form>
+  );
+}
+
 
 function CertPlate({
   title,
@@ -524,8 +611,45 @@ const CSS = `
 .portfolio .lightbox-loading { flex:1; display:flex; align-items:center; justify-content:center; color:var(--muted); background:var(--surface); font-size:0.9rem; }
 .portfolio .btn-sm { padding:8px 14px; font-size:0.8rem; }
 .portfolio .lightbox-close { position:absolute; top:16px; right:24px; background:none; border:none; color:var(--text); font-size:2rem; cursor:pointer; line-height:1; z-index:2; }
+.portfolio .nav-resume { margin-left:8px; box-shadow:0 6px 18px -8px rgba(242,184,7,0.7); }
+.portfolio .aurora {
+  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  background:radial-gradient(ellipse at 50% -20%, rgba(45,212,191,0.08), transparent 60%), #0B0F19;
+}
+.portfolio .aurora-blob {
+  position:absolute; width:52vmax; height:52vmax; border-radius:50%;
+  filter:blur(90px); opacity:0.55; mix-blend-mode:screen;
+  will-change:transform;
+}
+.portfolio .aurora-blob.b1 { background:radial-gradient(circle,#2DD4BF 0%,transparent 65%); top:-18%; left:-12%; animation:aurora-a 22s ease-in-out infinite alternate; }
+.portfolio .aurora-blob.b2 { background:radial-gradient(circle,#F2B807 0%,transparent 65%); top:10%; right:-18%; opacity:0.35; animation:aurora-b 28s ease-in-out infinite alternate; }
+.portfolio .aurora-blob.b3 { background:radial-gradient(circle,#3D81E3 0%,transparent 65%); bottom:-22%; left:20%; opacity:0.45; animation:aurora-c 32s ease-in-out infinite alternate; }
+.portfolio .aurora-blob.b4 { background:radial-gradient(circle,#8B5CF6 0%,transparent 65%); bottom:-10%; right:5%; opacity:0.3; animation:aurora-d 26s ease-in-out infinite alternate; }
+@keyframes aurora-a { 0% { transform:translate(0,0) scale(1); } 100% { transform:translate(12vw,8vh) scale(1.15); } }
+@keyframes aurora-b { 0% { transform:translate(0,0) scale(1.1); } 100% { transform:translate(-14vw,10vh) scale(1); } }
+@keyframes aurora-c { 0% { transform:translate(0,0) scale(1); } 100% { transform:translate(10vw,-8vh) scale(1.2); } }
+@keyframes aurora-d { 0% { transform:translate(0,0) scale(0.95); } 100% { transform:translate(-8vw,-12vh) scale(1.15); } }
+@media (prefers-reduced-motion:reduce) { .portfolio .aurora-blob { animation:none !important; } }
+
+.portfolio .contact-form { display:flex; flex-direction:column; gap:16px; max-width:640px; margin-top:8px; }
+.portfolio .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.portfolio .field { display:flex; flex-direction:column; gap:6px; }
+.portfolio .field-label { font-size:0.72rem; color:var(--muted-2); text-transform:uppercase; letter-spacing:0.1em; }
+.portfolio .field input, .portfolio .field textarea {
+  width:100%; background:rgba(19,24,38,0.7); border:1px solid var(--border); border-radius:8px;
+  padding:12px 14px; color:var(--text); font-family:var(--font-body); font-size:0.95rem;
+  transition:border-color 0.2s,background 0.2s; resize:vertical;
+}
+.portfolio .field input:focus, .portfolio .field textarea:focus {
+  outline:none; border-color:var(--teal); background:rgba(19,24,38,0.9);
+}
+.portfolio .contact-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:4px; }
+.portfolio .contact-sent { color:var(--teal); font-size:0.82rem; }
+
 @media (max-width:860px) {
   .portfolio .hero { grid-template-columns:1fr; padding-top:48px; }
   .portfolio .nav-links { display:none; }
+  .portfolio .contact-grid { grid-template-columns:1fr; }
+  .portfolio .nav { gap:12px; }
 }
 `;
