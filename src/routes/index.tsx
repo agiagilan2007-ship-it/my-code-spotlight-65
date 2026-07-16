@@ -204,7 +204,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="about">
-          <h2 className="section-title"><span className="mono index">01</span> About</h2>
+          <h2 className="section-title">About</h2>
           <p className="about-bio">
             I'm a school student with 5 completed certifications in Python and data analytics,
             including a 12-week NPTEL program from IIT Roorkee (63% consolidated, 29/25 on the
