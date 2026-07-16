@@ -134,6 +134,8 @@ const TERMINAL_LINES = [
 function Portfolio() {
   const [typed, setTyped] = useState<string[]>([]);
   const [lightbox, setLightbox] = useState<null | (typeof CERTIFICATES)[number]>(null);
+  const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
 
   useEffect(() => {
     let i = 0;
@@ -150,6 +152,34 @@ function Portfolio() {
     }, 550);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (!lightbox) {
+      setPdfBlobUrl(null);
+      return;
+    }
+    let cancelled = false;
+    let objectUrl: string | null = null;
+    setPdfLoading(true);
+    setPdfBlobUrl(null);
+    fetch(lightbox.pdf)
+      .then((r) => r.blob())
+      .then((blob) => {
+        if (cancelled) return;
+        objectUrl = URL.createObjectURL(
+          new Blob([blob], { type: "application/pdf" })
+        );
+        setPdfBlobUrl(objectUrl);
+        setPdfLoading(false);
+      })
+      .catch(() => {
+        if (!cancelled) setPdfLoading(false);
+      });
+    return () => {
+      cancelled = true;
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [lightbox]);
 
   return (
     <div className="portfolio">
@@ -322,7 +352,13 @@ function Portfolio() {
                 Open PDF ↗
               </a>
             </div>
-            <iframe src={lightbox.pdf} className="lightbox-pdf" title={lightbox.title} />
+            {pdfBlobUrl ? (
+              <iframe src={pdfBlobUrl} className="lightbox-pdf" title={lightbox.title} />
+            ) : (
+              <div className="lightbox-loading mono">
+                {pdfLoading ? "Loading certificate…" : "Unable to load PDF. Use “Open PDF ↗”."}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -485,6 +521,7 @@ const CSS = `
 .portfolio .lightbox-title { font-family:var(--font-display); font-weight:600; font-size:1rem; margin:0; color:var(--text); }
 .portfolio .lightbox-issuer { color:var(--muted); font-size:0.78rem; margin:2px 0 0; }
 .portfolio .lightbox-pdf { flex:1; width:100%; border:0; background:#fff; }
+.portfolio .lightbox-loading { flex:1; display:flex; align-items:center; justify-content:center; color:var(--muted); background:var(--surface); font-size:0.9rem; }
 .portfolio .btn-sm { padding:8px 14px; font-size:0.8rem; }
 .portfolio .lightbox-close { position:absolute; top:16px; right:24px; background:none; border:none; color:var(--text); font-size:2rem; cursor:pointer; line-height:1; z-index:2; }
 @media (max-width:860px) {
