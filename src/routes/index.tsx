@@ -521,6 +521,7 @@ const CSS = `
 .portfolio .lightbox-title { font-family:var(--font-display); font-weight:600; font-size:1rem; margin:0; color:var(--text); }
 .portfolio .lightbox-issuer { color:var(--muted); font-size:0.78rem; margin:2px 0 0; }
 .portfolio .lightbox-pdf { flex:1; width:100%; border:0; background:#fff; }
+.portfolio .lightbox-loading { flex:1; display:flex; align-items:center; justify-content:center; color:var(--muted); background:var(--surface); font-size:0.9rem; }
 .portfolio .btn-sm { padding:8px 14px; font-size:0.8rem; }
 .portfolio .lightbox-close { position:absolute; top:16px; right:24px; background:none; border:none; color:var(--text); font-size:2rem; cursor:pointer; line-height:1; z-index:2; }
 @media (max-width:860px) {
