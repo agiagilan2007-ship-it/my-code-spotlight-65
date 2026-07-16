@@ -251,7 +251,7 @@ function Portfolio() {
 
         <section className="section" id="certificates">
           <div className="container">
-            <h2 className="section-title"><span className="mono index">04</span> Certificates</h2>
+            <h2 className="section-title">Certificates</h2>
             <p className="section-sub">
               Course completion certificates from my{" "}
               <a className="link-accent" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
