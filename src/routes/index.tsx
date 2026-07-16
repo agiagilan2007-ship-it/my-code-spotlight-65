@@ -390,6 +390,69 @@ function Portfolio() {
   );
 }
 
+function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Portfolio contact from ${name || "visitor"}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}\n\n— Sent from agilan.portfolio`
+    );
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    setSent(true);
+  };
+
+  return (
+    <form className="contact-form" onSubmit={onSubmit}>
+      <div className="contact-grid">
+        <label className="field">
+          <span className="field-label mono">name</span>
+          <input
+            required
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name"
+          />
+        </label>
+        <label className="field">
+          <span className="field-label mono">email</span>
+          <input
+            required
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+          />
+        </label>
+      </div>
+      <label className="field">
+        <span className="field-label mono">message</span>
+        <textarea
+          required
+          rows={5}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Tell me about the opportunity, project, or idea…"
+        />
+      </label>
+      <div className="contact-actions">
+        <button type="submit" className="btn btn-primary">Send Message →</button>
+        {sent && (
+          <span className="contact-sent mono">
+            ✓ Opened your email app — hit send to deliver it.
+          </span>
+        )}
+      </div>
+    </form>
+  );
+}
+
+
 function CertPlate({
   title,
   issuer,
