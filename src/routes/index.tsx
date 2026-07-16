@@ -313,13 +313,16 @@ function Portfolio() {
         <div className="lightbox open" role="dialog" onClick={() => setLightbox(null)}>
           <button className="lightbox-close" aria-label="Close">×</button>
           <div className="lightbox-inner" onClick={(e) => e.stopPropagation()}>
-            <CertPlate title={lightbox.title} issuer={lightbox.issuer} accent={lightbox.accent} large />
-            <p className="lightbox-note mono">
-              View original credential on{" "}
-              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="link-accent">
-                LinkedIn ↗
+            <div className="lightbox-header">
+              <div>
+                <p className="lightbox-title">{lightbox.title}</p>
+                <p className="lightbox-issuer mono">{lightbox.issuer}</p>
+              </div>
+              <a href={lightbox.pdf} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm">
+                Open PDF ↗
               </a>
-            </p>
+            </div>
+            <iframe src={lightbox.pdf} className="lightbox-pdf" title={lightbox.title} />
           </div>
         </div>
       )}
