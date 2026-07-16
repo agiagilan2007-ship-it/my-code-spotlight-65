@@ -346,7 +346,6 @@ function CertPlate({
       <line x1={w / 2 - 70} y1={h * 0.24} x2={w / 2 + 70} y2={h * 0.24} stroke={accent} strokeWidth="2" />
       <foreignObject x="40" y={h * 0.32} width={w - 80} height={h * 0.3}>
         <div
-          xmlns="http://www.w3.org/1999/xhtml"
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: large ? "30px" : "22px",
