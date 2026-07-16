@@ -292,7 +292,7 @@ function Portfolio() {
         </section>
 
         <section className="section container" id="contact">
-          <h2 className="section-title"><span className="mono index">06</span> Contact</h2>
+          <h2 className="section-title">Contact</h2>
           <p className="section-sub">Open to internships, collaborations, and learning opportunities.</p>
           <div className="contact-row">
             <a className="btn btn-primary" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
