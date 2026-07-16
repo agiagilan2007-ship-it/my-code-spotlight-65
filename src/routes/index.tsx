@@ -1,11 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
-import nptelPdf from "@/assets/NPTEL-Data_Analytics_with_Python_Certificate_AGILAN_V_MU.pdf.asset.json";
-import pythonFoundationPdf from "@/assets/Python_Foundation_Certification_-_AGILAN_V_MU.pdf.asset.json";
-import gcpMlPdf from "@/assets/Google_Cloud_Machine_Learning_Engineer_Certification_Prep_-_Agilan_V_MU.pdf.asset.json";
-import genaiPdf from "@/assets/Generative_AI_Foundations_-_IT_Integration_with_Generative_AI_-_Agilan_V_MU.pdf.asset.json";
-import canvaPdf from "@/assets/Coursera_-_Build_your_buisness_brand_using_Canva-_Agilan_V_MU.pdf.asset.json";
-import resumePdf from "@/assets/Agilan_V_MU_Resume.pdf.asset.json";
+
+// Static assets served directly from /public — works on Vercel, Netlify, or any static host.
+const nptelPdf = { url: "/certificates/nptel-data-analytics-python.pdf" };
+const pythonFoundationPdf = { url: "/certificates/python-foundation.pdf" };
+const gcpMlPdf = { url: "/certificates/gcp-ml-engineer-prep.pdf" };
+const genaiPdf = { url: "/certificates/genai-foundations.pdf" };
+const canvaPdf = { url: "/certificates/canva-brand-building.pdf" };
+const resumePdf = { url: "/resume.pdf" };
 
 const CONTACT_EMAIL = "agiagilan2007@gmail.com";
 
